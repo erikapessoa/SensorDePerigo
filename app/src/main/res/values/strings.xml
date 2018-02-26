@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">SensorPerigo</string>
+    <string name="app_name">SensorPerigo</string>"
+
+    <string name="prompt_email">Usuário</string>
+    <string name="prompt_password">Senha</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_register">Cadastre-se</string>
 </resources>
