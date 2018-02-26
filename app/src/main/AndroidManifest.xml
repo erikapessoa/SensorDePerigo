@@ -16,6 +16,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.PerfilActivity" />
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.MainMenuActivity" />
+        <activity android:name=".ui.NotificationActivity" />
+
+        <service
+            android:name=".service.IKnotServiceConnection"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.KnotIntegrationService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.ServiceBinder"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.NotificationService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
