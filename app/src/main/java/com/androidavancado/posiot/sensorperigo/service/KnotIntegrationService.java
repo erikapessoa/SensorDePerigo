@@ -40,7 +40,6 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
 
 
     //##########################################
-
     private static final String TAG = "TESTEGPS";
     private LocationManager mLocationManager = null;
     private static final int LOCATION_INTERVAL = 1000;
@@ -105,9 +104,7 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
 
         //start pooling
         syncAndStartPooling();
-
     }
-
 
     private void notifyListener(List<ButtonData> deviceData){
         if(mListener != null) {
@@ -119,14 +116,14 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
             double latitude = mLastLocation.getLatitude();
             double longitude = mLastLocation.getLongitude();
 
-                SharedPreferences prefs = this.getSharedPreferences("ArquivoPreferencia", Context.MODE_PRIVATE);
-                String nomeContato = prefs.getString("NOME_CONTATO", null);
-                String foneContato = prefs.getString("FONE_CONTATO", null);
+            SharedPreferences prefs = this.getSharedPreferences("ArquivoPreferencia", Context.MODE_PRIVATE);
+            String nomeContato = prefs.getString("NOME_CONTATO", null);
+            String foneContato = prefs.getString("FONE_CONTATO", null);
 
-                String mensagem = Util.mensagem(nomeContato, latitude, longitude);
+            String mensagem = Util.mensagem(nomeContato, latitude, longitude);
 
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage(foneContato, null, mensagem, null, null);
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(foneContato, null, mensagem, null, null);
 
         }
     }
@@ -246,10 +243,6 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
     }
 
     //##################################################
-
-
-
-
 
 
 }
