@@ -15,6 +15,7 @@ public class Constants {
     public static final String MARRIED_MARITAL_STATUS  = "MARRIED";
     public static final String DIVORCED_MARITAL_STATUS  = "DIVORCED";
 
+    public static final String ARQUIVO_PREF = "ArquivoPreferencia";
 
 
 }
