@@ -8,42 +8,42 @@ public class Contact {
 
     private String mName;
     private String mEmail;
-    private Phone mCellPhone;
+    private CellPhone mCellPhone;
 
     /**
      * Nome do contato, e-mail e número do celular.
      *
      * @param mName
      * @param mEmail
-     * @param mCellPhone
+     * @param mCellCellPhone
      */
-    public Contact(String mName, String mEmail, Phone mCellPhone) {
+    public Contact(String mName, String mEmail, CellPhone mCellCellPhone) {
         this.mName = mName;
         this.mEmail = mEmail;
-        this.mCellPhone = mCellPhone;
+        this.mCellPhone = mCellCellPhone;
     }
 
     public String getmName() {
         return mName;
     }
 
-    public void setmName(String mName) {
-        this.mName = mName;
+    public void setmName(String name) {
+        this.mName = name;
     }
 
     public String getmEmail() {
         return mEmail;
     }
 
-    public void setmEmail(String mEmail) {
-        this.mEmail = mEmail;
+    public void setmEmail(String email) {
+        this.mEmail = email;
     }
 
-    public Phone getmCellPhone() {
+    public CellPhone getmCellPhone() {
         return mCellPhone;
     }
 
-    public void setmCellPhone(Phone mCellPhone) {
-        this.mCellPhone = mCellPhone;
+    public void setmCellPhone(CellPhone cellPhone) {
+        this.mCellPhone = cellPhone;
     }
 }
