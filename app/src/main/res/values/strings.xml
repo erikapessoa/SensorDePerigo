@@ -5,4 +5,9 @@
     <string name="prompt_password">Senha</string>
     <string name="action_sign_in">Login</string>
     <string name="action_register">Cadastre-se</string>
+    <string name="botao_perfil">Perfil</string>
+    <string name="botao_notifica">Notificação</string>
+
+
+
 </resources>

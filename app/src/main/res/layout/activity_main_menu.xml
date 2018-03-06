@@ -1,9 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    android:background="@drawable/back"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.androidavancado.posiot.sensorperigo.ui.MainMenuActivity">
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/botaoPerfil"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_above="@+id/botaoBusca"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="90dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/botao"
+        android:onClick="AbrirPerfilMenu"
+        android:text="@string/botao_perfil"
+        android:textColor="@color/colorSnow"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/botaoBusca"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="90dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="50dp"
+        android:background="@drawable/botao"
+        android:onClick="AbrirNotificacao"
+        android:text="@string/botao_notifica"
+        android:textColor="@color/colorSnow"
+        android:textSize="30dp" />
+
+</RelativeLayout>
