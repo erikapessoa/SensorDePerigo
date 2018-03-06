@@ -8,6 +8,8 @@ import java.util.Calendar;
 
 public class Util {
 
+    static String cpf;
+
     /**
      *
      * @param nome
@@ -43,10 +45,64 @@ public class Util {
      */
     public static boolean validateCPF (String cpf) {
 
-        boolean isCPF = false;
+        if ( cpf == null ){
+            return false;
+        }
+        else{
+            String cpfGerado = "";
+            Util.cpf = cpf;
+            removerCaracteres();
+            if ( verificarSeTamanhoInvalido(Util.cpf) )
+                return false;
+            if ( verificarSeDigIguais(Util.cpf) )
+                return false;
+            cpfGerado = Util.cpf.substring(0, 9);
+            cpfGerado = cpfGerado.concat(calculoComCpf(cpfGerado));
+            cpfGerado = cpfGerado.concat(calculoComCpf(cpfGerado));
 
-        return isCPF;
+            if ( !cpfGerado.equals(Util.cpf))
+                return false;
+        }
+        return true;
+
     }
+
+    private static void removerCaracteres(){
+        Util.cpf = Util.cpf.replace("-","");
+        Util.cpf = Util.cpf.replace(".","");
+    }
+    private static boolean verificarSeTamanhoInvalido(String cpf){
+        if ( cpf.length() != 11 )
+            return true;
+        return false;
+    }
+    private static boolean verificarSeDigIguais(String cpf){
+        //char primDig = cpf.charAt(0);
+        char primDig = '0';
+        char [] charCpf = cpf.toCharArray();
+        for( char c: charCpf  )
+            if ( c != primDig )
+                return false;
+        return true;
+    }
+    private static String calculoComCpf(String cpf){
+        int digGerado = 0;
+        int mult = cpf.length()+1;
+        char [] charCpf = cpf.toCharArray();
+        for ( int i = 0; i < cpf.length(); i++ )
+            digGerado += (charCpf[i]-48)* mult--;
+        if ( digGerado % 11 < 2)
+            digGerado = 0;
+        else
+            digGerado = 11 - digGerado % 11;
+        return  String.valueOf(digGerado);
+    }
+
+
+
+
+
+
 
     /**
      * Considera um número de celular brasileiro contendo 9 números
@@ -61,6 +117,9 @@ public class Util {
 
         return isCellPhoneNumber;
     }
+
+
+
 
 
 }
