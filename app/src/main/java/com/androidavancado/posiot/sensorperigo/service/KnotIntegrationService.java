@@ -17,6 +17,7 @@ import android.util.Log;
 
 import com.androidavancado.posiot.sensorperigo.model.ButtonData;
 import com.androidavancado.posiot.sensorperigo.util.PoolingTimer;
+import com.androidavancado.posiot.sensorperigo.util.Util;
 
 import java.util.List;
 import java.util.Locale;
@@ -112,105 +113,20 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
         if(mListener != null) {
             mListener.onDataChanged(deviceData);
 
-
-
-
             initializeLocationManager();
-            try {
-                mLocationManager.requestLocationUpdates(
-                        LocationManager.NETWORK_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
-                        mLocationListeners[1]);
-            } catch (java.lang.SecurityException ex) {
-                Log.i(TAG, "fail to request location update, ignore", ex);
-            } catch (IllegalArgumentException ex) {
-                Log.d(TAG, "network provider does not exist, " + ex.getMessage());
-            }
-            try {
-                mLocationManager.requestLocationUpdates(
-                        LocationManager.GPS_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
-                        mLocationListeners[0]);
-            } catch (java.lang.SecurityException ex) {
-                Log.i(TAG, "fail to request location update, ignore", ex);
-            } catch (IllegalArgumentException ex) {
-                Log.d(TAG, "gps provider does not exist " + ex.getMessage());
-            }
-
-
+            requestUpdate();
 
             double latitude = mLastLocation.getLatitude();
             double longitude = mLastLocation.getLongitude();
-            String endereco, cidade, estado, pais;
-
-            Geocoder geocoder;
-            List<Address> addresses;
-            geocoder = new Geocoder(this, Locale.getDefault());
-
-            try
-            {
-                addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-                endereco = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-                cidade = addresses.get(0).getLocality();
-                estado = addresses.get(0).getAdminArea();
-                pais = addresses.get(0).getCountryName();
 
                 SharedPreferences prefs = this.getSharedPreferences("ArquivoPreferencia", Context.MODE_PRIVATE);
                 String nomeContato = prefs.getString("NOME_CONTATO", null);
                 String foneContato = prefs.getString("FONE_CONTATO", null);
 
-                String mensagem = nomeContato + ", estou precisando de ajuda urgente! Me encontro no "+
-                        "seguinte local : País: " + pais + ", Estado: " + estado +", Cidade: "+
-                        cidade +", Endereco: " + endereco;
-
-
-
-
+                String mensagem = Util.mensagem(nomeContato, latitude, longitude);
 
                 SmsManager smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(foneContato, null, mensagem, null, null);
-
-            } catch (Exception e)
-            {
-
-            }
-
-
-
-
-
-
-/*
-
-            Address addresses;
-            String locationProvider = LocationManager.NETWORK_PROVIDER;
-            // Or use LocationManager.GPS_PROVIDER
-
-            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                            != PackageManager.PERMISSION_GRANTED) {
-                        // Permission to access the location is missing.
-                        PermissionUtils.requestPermission(, 1,
-                                android.Manifest.permission.ACCESS_FINE_LOCATION, true);
-                    } else  {
-                        // Access to the location has been granted to the app.
-                LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
-                Location lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
-
-                latitude = lastKnownLocation.getLatitude();
-                longitude= lastKnownLocation.getLongitude();
-                    }
-
-
-
-             ############################################################################
-                SharedPreferences prefs = this.getSharedPreferences("ArquivoPreferencia", Context.MODE_PRIVATE);
-                String nomeContato = prefs.getString("NOME_CONTATO", null);
-                String foneContato = prefs.getString("FONE_CONTATO", null);
-
-                String mensagem = nomeContato + ", estou precisando de ajuda urgente! Me encontro no "+
-                "seguinte local :
-
-
-            */
 
         }
     }
@@ -226,6 +142,7 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
 
         stopSelf();
     }
+
 
     private class SyncDeviceDataTask extends AsyncTask {
 
@@ -257,11 +174,11 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
                 }
             }
         }
+
     }
 
-
-
-    //######################################
+    //##################################################
+    // UTILIZADO PARA PEGAR A LOCALIZAÇÃO DO USUÁRIO
     private class LocationListener implements android.location.LocationListener
     {
 
@@ -302,6 +219,29 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
         Log.e(TAG, "initializeLocationManager");
         if (mLocationManager == null) {
             mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+        }
+    }
+
+    public void requestUpdate()
+    {
+        try {
+            mLocationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
+                    mLocationListeners[1]);
+        } catch (java.lang.SecurityException ex) {
+            Log.i(TAG, "fail to request location update, ignore", ex);
+        } catch (IllegalArgumentException ex) {
+            Log.d(TAG, "network provider does not exist, " + ex.getMessage());
+        }
+
+        try {
+            mLocationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
+                    mLocationListeners[0]);
+        } catch (java.lang.SecurityException ex) {
+            Log.i(TAG, "fail to request location update, ignore", ex);
+        } catch (IllegalArgumentException ex) {
+            Log.d(TAG, "gps provider does not exist " + ex.getMessage());
         }
     }
 
