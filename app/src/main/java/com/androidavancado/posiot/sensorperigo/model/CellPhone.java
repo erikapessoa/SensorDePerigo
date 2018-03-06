@@ -15,7 +15,7 @@ public class CellPhone {
      */
     public CellPhone() {
 
-        this.mDDI = 51;
+        this.mDDI = 55;
         this.mDDD = 81;
         this.mNumber = new char[9];
     }

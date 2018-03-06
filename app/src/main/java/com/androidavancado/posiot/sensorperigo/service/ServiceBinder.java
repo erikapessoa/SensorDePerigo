@@ -7,5 +7,17 @@ import android.os.IBinder;
 
 public class ServiceBinder extends Binder {
 
+    private IKnotServiceConnection mBinder;
+
+    public ServiceBinder(IKnotServiceConnection s) {
+        mBinder = s;
+    }
+
+    public IKnotServiceConnection getService() {
+        return mBinder;
+    }
+
+
+
 
 }
