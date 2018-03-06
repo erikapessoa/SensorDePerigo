@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.androidavancado.posiot.sensorperigo.R;
+import com.androidavancado.posiot.sensorperigo.util.Constants;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -17,7 +18,6 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mSenha;
     private Button mBotaoSalvar;
 
-    public static final String ARQUIVO_PREF = "ArquivoPreferencia";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +35,15 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // ISSO É EM CADASTRO NO PerfilActivity - colocar prefe no UTIL
-                SharedPreferences settings = getSharedPreferences(ARQUIVO_PREF, 0);
-                SharedPreferences.Editor editor = settings.edit();
-
                 if(mUsuario.getText().toString().equals("") || mSenha.getText().toString().equals("") ){
                     Toast.makeText(getApplicationContext(), "Nenhum campos pode estar vazio", Toast.LENGTH_SHORT);
                 } else{
-                    // ISSO É EM CADASTRO NO PerfilActivity
-                   // salvar
-                    editor.putString("login", mUsuario.getText().toString());
-                    editor.putString("senha", mSenha.getText().toString());
-                    editor.commit();
 
                 }
             }
         });
 
-        // Recuperar os dados salvos lá no PerfilActitivy, como pego de lá?
-        SharedPreferences settings = getSharedPreferences(ARQUIVO_PREF, 0);
-        if(settings.contains("login") && settings.contains("senha") ){
-            //abrir main_menu
-        } else{
-            Toast.makeText(getApplicationContext(), "Esse usuário não foi cadastrado", Toast.LENGTH_SHORT);
 
-        }
 
     }
 

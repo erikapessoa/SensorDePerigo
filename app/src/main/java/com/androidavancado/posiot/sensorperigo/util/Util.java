@@ -1,6 +1,14 @@
 package com.androidavancado.posiot.sensorperigo.util;
 
+import android.content.SharedPreferences;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.androidavancado.posiot.sensorperigo.R;
+import com.androidavancado.posiot.sensorperigo.model.User;
+
 import java.util.Calendar;
+import java.util.regex.Pattern;
 
 /**
  * Created by erika on 25/02/18.
@@ -99,9 +107,16 @@ public class Util {
     }
 
 
+    // ****** Validando Email *********** //
+    public static boolean validateEmail(String email){
 
-
-
+        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
+    }
 
 
     /**
@@ -114,12 +129,48 @@ public class Util {
     public static boolean validateCellPhoneNumber (String number) {
 
         boolean isCellPhoneNumber = false;
-
         return isCellPhoneNumber;
     }
 
+    private EditText mUsuario;
+    private EditText mSenha;
 
+    /*
+    mUsuario = (EditText) findViewById(R.id.usuarioText);
+    mSenha = (EditText) findViewById(R.id.password);
 
+    // ******** Cadastrar os dados do usuário no SheredPrefer *******
+    public static void registerUser (User user) {
+
+        SharedPreferences settings = getSharedPreferences(Constants.ARCHIVE_PREF, 0);
+        SharedPreferences.Editor editor = settings.edit();
+
+        editor.putString("login", mUsuario.getText().toString());
+        editor.putString("senha", mSenha.getText().toString());
+        editor.commit();
+
+    }
+*/
+
+    // Verificar login do usuário no SheredPreferences
+    public static boolean verifyUser (String email, String password) {
+
+        boolean isOk = false;
+
+        return isOk;
+        // Recuperar os dados salvos
+
+        /*
+        SharedPreferences settings = getSharedPreferences(Constants.ARCHIVE_PREF, 0);
+        if(settings.contains("login") && settings.contains("senha") ){
+            //abrir main_menu
+        } else{
+            Toast.makeText(getApplicationContext(), "Esse usuário não foi cadastrado", Toast.LENGTH_SHORT);
+
+        }
+        */
+
+    }
 
 
 }
