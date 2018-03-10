@@ -23,11 +23,11 @@ public class Constants {
     public static final String HELP_ME = "Estou precisando de ajuda urgente! Me encontro no seguinte local: ";
     public static final String MAP_URL_LOCALIZATION = "https://www.google.com/maps/?q= ";
 
-    public static final String ARCHIVE_PREF = "ArquivoPreferencia";
-
-
-
-
+    /* Contantes usadas no Shared Preferences */
+    public static final String SENSOR_PERIGO_PREF = "SensorPerigoPreferences";
+    public static final String SP_CONTACT_NAME = "CONTACT_NAME_";
+    public static final String SP_CONTACT_CELLPHONE = "CONTACT_CELLPHONE_";
+    public static final String SP_CONTACT_EMAIL = "CONTACT_EMAIL_";
 
 
 }

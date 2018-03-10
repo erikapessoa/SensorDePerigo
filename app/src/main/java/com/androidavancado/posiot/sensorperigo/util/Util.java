@@ -1,14 +1,14 @@
 package com.androidavancado.posiot.sensorperigo.util;
 
 import android.content.SharedPreferences;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.androidavancado.posiot.sensorperigo.App;
-import com.androidavancado.posiot.sensorperigo.R;
+import com.androidavancado.posiot.sensorperigo.model.CellPhone;
+import com.androidavancado.posiot.sensorperigo.model.Contact;
 import com.androidavancado.posiot.sensorperigo.model.User;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -133,15 +133,10 @@ public class Util {
         return isCellPhoneNumber;
     }
 
-   // private EditText mUsuario;
-   // private EditText mSenha;
-
-
-
-    // ******** Cadastrar os dados do usuário no SheredPrefer *******
+    // ******** Cadastrar os dados do usuário no SharedPrefer *******
     public static void registerUser (User user) {
 
-        SharedPreferences settings = App.getContext().getSharedPreferences(Constants.ARCHIVE_PREF, 0);
+        SharedPreferences settings = App.getContext().getSharedPreferences(Constants.SENSOR_PERIGO_PREF, 0);
         SharedPreferences.Editor editor = settings.edit();
 
 
@@ -161,7 +156,7 @@ public class Util {
         // Recuperar os dados salvos
 
         /*
-        SharedPreferences settings = getSharedPreferences(Constants.ARCHIVE_PREF, 0);
+        SharedPreferences settings = getSharedPreferences(Constants.SENSOR_PERIGO_PREF, 0);
         if(settings.contains("login") && settings.contains("senha") ){
             //abrir main_menu
         } else{
@@ -171,6 +166,29 @@ public class Util {
         */
 
     }
+
+    /**
+     * Salva os contatos escolhidos pelo usuário
+     *
+     * @param contacts Lista de contatos
+     */
+    public static void saveUserContacts (List<Contact> contacts) {
+
+        SharedPreferences sensorPerigoPreferences = App.getContext().getSharedPreferences(Constants.SENSOR_PERIGO_PREF, 0);
+        SharedPreferences.Editor editor = sensorPerigoPreferences.edit();
+        int count = 1;
+
+
+        for (Contact contact: contacts) {
+            editor.putString(Constants.SP_CONTACT_NAME + count, contact.getmName());
+            editor.putString(Constants.SP_CONTACT_CELLPHONE + count, contact.getmCellPhone().toString());
+            editor.putString(Constants.SP_CONTACT_EMAIL + count, contact.getmEmail());
+        }
+
+        editor.commit();
+
+    }
+
 
 
 }

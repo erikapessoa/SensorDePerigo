@@ -51,4 +51,14 @@ public class CellPhone {
     public String charToStringNumber() {
         return mNumber.toString();
     }
+
+    /**
+     * Retorna o número completo com DDI, DDD e número.
+     *
+     * @return String contendo o número de celular
+     */
+    public String toString() {
+
+        return this.mDDI + this.mDDD + charToStringNumber();
+    }
 }
