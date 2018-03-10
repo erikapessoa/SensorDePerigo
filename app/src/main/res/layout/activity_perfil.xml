@@ -66,12 +66,30 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/colorSnow"/>
         <EditText
-            android:id="@+id/editTextNasc"
-            android:layout_width="245dp"
+            android:id="@+id/dia"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="3dp"
             android:layout_marginTop="10dp"
-            android:hint="Digite sua data de nascimento"
+            android:hint="Digite a data"
+            android:ems="10"
+            android:inputType="date" />
+        <EditText
+            android:id="@+id/mes"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="10dp"
+            android:hint="Digite a data"
+            android:ems="10"
+            android:inputType="date" />
+        <EditText
+            android:id="@+id/ano"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="10dp"
+            android:hint="Digite a data"
             android:ems="10"
             android:inputType="date" />
     </LinearLayout>
@@ -157,32 +175,15 @@
             android:textColor="@color/colorSnow"/>
 
         <EditText
-            android:id="@+id/dia"
-            android:layout_width="50dp"
+            android:id="@+id/editTextDataEx"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="10dp"
             android:hint="Digite a data"
             android:ems="10"
             android:inputType="date" />
-        <EditText
-            android:id="@+id/mes"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="10dp"
-            android:hint="Digite a data"
-            android:ems="10"
-            android:inputType="date" />
-        <EditText
-            android:id="@+id/ano"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="10dp"
-            android:hint="Digite a data"
-            android:ems="10"
-            android:inputType="date" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

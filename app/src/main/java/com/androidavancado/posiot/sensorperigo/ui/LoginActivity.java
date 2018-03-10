@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         mUsuario = (EditText) findViewById(R.id.usuarioText);
         mSenha = (EditText) findViewById(R.id.password);
         mBotaoSalvar = (Button) findViewById(R.id.sign_in_button);

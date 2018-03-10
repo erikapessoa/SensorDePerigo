@@ -26,12 +26,14 @@ public class PerfilActivity extends AppCompatActivity {
 
     private User mUser;
     private EditText mTextNome;
-    private EditText mTextDatNasc;
     private RadioGroup mTextSexo;
     private EditText mTextNacionalidade;
     private EditText mTextEstadoCivil;
     private EditText mEmail;
     private EditText mTextSenha;
+    private EditText mDiaNasc;
+    private EditText mMesNasc;
+    private EditText mAnoNasc;
 
     private PersonalIDs mIDs;
     private EditText mTextCPF;
@@ -54,7 +56,6 @@ public class PerfilActivity extends AppCompatActivity {
     public void Salvar(View v) {
 
         mTextNome = findViewById(R.id.editTextNome);
-        mTextDatNasc = findViewById(R.id.editTextNasc);
         mTextCPF = findViewById(R.id.editTextCPF);
         mTextRG = findViewById(R.id.editTextRG);
         mTextOrgEm = findViewById(R.id.editTextOrgao);
@@ -68,10 +69,22 @@ public class PerfilActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.editTextEmail);
         mTextSenha = findViewById(R.id.editTextSenha);
 
+        mDiaNasc = findViewById(R.id.dia);
+        mMesNasc = findViewById(R.id.mes);
+        mAnoNasc = findViewById(R.id.ano);
+
+        int diaNasc, mesNasc, anoNasc;
+        diaNasc = Integer.parseInt(mDiaNasc.getText().toString());
+        mesNasc = Integer.parseInt(mMesNasc.getText().toString());
+        anoNasc = Integer.parseInt(mAnoNasc.getText().toString());
+
+
+
         mUser.setmName(mTextNome.getText().toString());
         mUser.setmSex(((char) mTextSexo.getCheckedRadioButtonId()));
         mUser.setmMaritalStatus(mTextEstadoCivil.getText().toString());
         mUser.setmNationality(mTextNacionalidade.getText().toString());
+        mUser.setmDateOfBirth(Util.mountDate(diaNasc, mesNasc, anoNasc));
 
         String UserAux = mEmail.getText().toString();
         char[] SenhaAux = mTextSenha.getText().toString().toCharArray();
@@ -95,6 +108,11 @@ public class PerfilActivity extends AppCompatActivity {
 
         }else{
             Toast.makeText(getApplicationContext(), "Endereço de Email Inválido", Toast.LENGTH_SHORT).show();
+        }
+
+        if(!Util.validateCPF(mTextCPF.getText().toString()))
+        {
+            Toast.makeText(getApplicationContext(), "CPF Inválido", Toast.LENGTH_SHORT).show();
         }
 
     }
