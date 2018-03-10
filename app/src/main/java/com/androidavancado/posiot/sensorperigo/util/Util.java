@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import com.androidavancado.posiot.sensorperigo.App;
 import com.androidavancado.posiot.sensorperigo.model.CellPhone;
 import com.androidavancado.posiot.sensorperigo.model.Contact;
+import com.androidavancado.posiot.sensorperigo.model.PersonalIDs;
 import com.androidavancado.posiot.sensorperigo.model.User;
 
 import java.util.Calendar;
@@ -139,9 +140,20 @@ public class Util {
         SharedPreferences settings = App.getContext().getSharedPreferences(Constants.SENSOR_PERIGO_PREF, 0);
         SharedPreferences.Editor editor = settings.edit();
 
-
-       // editor.putString("login", mUsuario.getText().toString());
-      //  editor.putString("senha", mSenha.getText().toString());
+        editor.putString("nome", user.getmName());
+        editor.putString("dataNasc", user.getmDateOfBirth().toString());
+        editor.putString("cpf", String.valueOf(user.getmRGandCPF().getmCPF()));
+        editor.putString("rg", String.valueOf(user.getmRGandCPF().getmRG()));
+        editor.putString("orgEmi", String.valueOf(user.getmRGandCPF().getmRG_mInstitutionEmitter()));
+        editor.putString("dataExp", String.valueOf(user.getmRGandCPF().getmRG_ExpeditionDate()));
+        editor.putString("uf", String.valueOf(user.getmRGandCPF().getmRG_UF()));
+        editor.putString("sexo", String.valueOf(user.getmSex()));
+        editor.putString("nascionalidade", user.getmNationality());
+        editor.putString("estadoCivil", user.getmMaritalStatus());
+        editor.putString("ddd", String.valueOf(user.getmCellPhone().getmDDD()));
+        editor.putString("fone", String.valueOf(user.getmCellPhone().getmNumber()));
+        editor.putString("email", user.getmEmail());
+        editor.putString("senha", String.valueOf(user.getmPasswordAuthetication().getPassword()));
         editor.commit();
 
     }
