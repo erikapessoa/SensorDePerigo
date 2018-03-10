@@ -52,6 +52,11 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK && requestCode == 1) {
             finish();
         }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Não encontramos seus dados! Por favor, tente novamente!", Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 
