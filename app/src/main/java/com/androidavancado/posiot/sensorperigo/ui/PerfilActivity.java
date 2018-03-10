@@ -62,7 +62,6 @@ public class PerfilActivity extends AppCompatActivity {
         mTextCPF = findViewById(R.id.editTextCPF);
         mTextRG = findViewById(R.id.editTextRG);
         mTextOrgEm = findViewById(R.id.editTextOrgao);
-        mTextDataExp = findViewById(R.id.editTextDataEx);
         mTextUF = findViewById(R.id.editTextUFexp);
         mTextSexo = findViewById(R.id.editRadio);
         mTextNacionalidade = findViewById(R.id.editTextNacionalidade);
