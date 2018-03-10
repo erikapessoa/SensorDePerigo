@@ -319,18 +319,6 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
             android:layout_marginTop="70dp">
 
             <Button
-                android:id="@+id/buttonCancel"
-                android:layout_width="140dp"
-                android:layout_height="50dp"
-                android:background="@drawable/botao"
-                android:text="Cancelar"
-                android:layout_marginLeft="50dp"
-                android:textColor="@color/colorSnow"
-                android:textStyle="bold"
-                android:onClick="cancel"
-                />
-
-            <Button
                 android:id="@+id/buttonSaveContacts"
                 android:layout_width="140dp"
                 android:layout_height="50dp"
