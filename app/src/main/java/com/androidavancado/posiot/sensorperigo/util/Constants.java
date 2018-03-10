@@ -6,6 +6,8 @@ package com.androidavancado.posiot.sensorperigo.util;
 
 public class Constants {
 
+    public static final String APP_NAME = "Sensor de Perigo";
+
     public static final String KNOT_URL = "http://knot-test.cesar.org.br:3000";
     public static final String DEFAULT_UUID = "";
     public static final String DEFAULT_TOKEN = "";

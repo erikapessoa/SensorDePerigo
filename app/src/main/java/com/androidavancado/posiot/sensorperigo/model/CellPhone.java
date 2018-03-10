@@ -1,5 +1,7 @@
 package com.androidavancado.posiot.sensorperigo.model;
 
+import java.util.Arrays;
+
 /**
  * Created by erika on 06/03/18.
  */
@@ -52,13 +54,15 @@ public class CellPhone {
         return mNumber.toString();
     }
 
+
+
     /**
      * Retorna o número completo com DDI, DDD e número.
      *
      * @return String contendo o número de celular
      */
+    @Override
     public String toString() {
-
-        return this.mDDI + this.mDDD + charToStringNumber();
+        return mDDI + mDDD + charToStringNumber();
     }
 }

@@ -11,7 +11,7 @@ import br.org.cesar.knot.lib.BuildConfig;
  */
 public class Logger {
 
-    private static final String TAG = "Diego";
+    private static final String TAG = Constants.APP_NAME;
 
     /**
      * Log print the given message

@@ -7,7 +7,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.androidavancado.posiot.sensorperigo.R;
+import com.androidavancado.posiot.sensorperigo.model.CellPhone;
+import com.androidavancado.posiot.sensorperigo.model.Contact;
+import com.androidavancado.posiot.sensorperigo.util.Logger;
 import com.androidavancado.posiot.sensorperigo.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NotificationActivity extends AppCompatActivity {
 
@@ -24,14 +30,6 @@ public class NotificationActivity extends AppCompatActivity {
          * não existir, abre a tela vazia
          */
 
-    }
-
-    /**
-     *
-     * @param v
-     */
-    public void cancel (View v) {
-        //aqui volta para a tela anterior
     }
 
     /**
@@ -68,7 +66,7 @@ public class NotificationActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
 
 
-        } else if (!Util.validateCellPhoneNumber(cellPhoneNumberContact1) || !Util.validateEmail(emailContact1) ||
+        } /* else if (!Util.validateCellPhoneNumber(cellPhoneNumberContact1) || !Util.validateEmail(emailContact1) ||
                 !Util.validateCellPhoneNumber(cellPhoneNumberContact2) || !Util.validateEmail(emailContact2) ||
                 !Util.validateCellPhoneNumber(cellPhoneNumberContact3) || !Util.validateEmail(emailContact3)) {
 
@@ -76,8 +74,49 @@ public class NotificationActivity extends AppCompatActivity {
                             "e tente salvar novamente!",
                     Toast.LENGTH_LONG).show();
 
-        } else {
+        } */ else {
 
+            int dDD = 0;
+            CellPhone cellphone = new CellPhone();
+            char[] cellphoneNumber;
+
+            dDD = Integer.parseInt(cellPhoneDDDContact1);
+            cellphoneNumber = cellPhoneNumberContact1.toCharArray();
+            cellphone.setmDDD(dDD);
+            cellphone.setmNumber(cellphoneNumber);
+
+            Logger.d("cellPhone 1 : " + cellphone.toString());
+
+            Contact contact1 = new Contact(nameContact1, emailContact1, cellphone);
+
+            dDD = Integer.parseInt(cellPhoneDDDContact2);
+            cellphoneNumber = cellPhoneNumberContact2.toCharArray();
+            cellphone.setmDDD(dDD);
+            cellphone.setmNumber(cellphoneNumber);
+
+            Logger.d("cellPhone 2 : " + cellphone.toString());
+
+            Contact contact2 = new Contact(nameContact2, emailContact2, cellphone);
+
+            dDD = Integer.parseInt(cellPhoneDDDContact3);
+            cellphoneNumber = cellPhoneNumberContact3.toCharArray();
+            cellphone.setmDDD(dDD);
+            cellphone.setmNumber(cellphoneNumber);
+
+            Logger.d("cellPhone 3 : " + cellphone.toString());
+
+            Contact contact3 = new Contact(nameContact3, emailContact3, cellphone);
+
+
+            List<Contact> contacts = new ArrayList<Contact>();
+            contacts.add(contact1);
+            contacts.add(contact2);
+            contacts.add(contact3);
+
+            Util.saveUserContacts(contacts);
+
+            Toast.makeText(getApplicationContext(), "Contatos SALVOS com sucesso!",
+                    Toast.LENGTH_LONG).show();
         }
     }
 
