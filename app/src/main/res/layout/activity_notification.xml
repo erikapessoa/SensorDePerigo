@@ -1,9 +1,350 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
 
-</android.support.constraint.ConstraintLayout>
+<LinearLayout
+
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:background="@drawable/back"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Notificações"
+    android:textStyle="bold"
+    android:textSize="30dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="100dp"
+    android:textColor="@color/colorSnow" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Digite abaixo as informações de 3 pessoas que você gostaria de avisar no caso de estar em perigo."
+        android:textStyle="bold"
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/colorSnow" />
+
+
+    <ScrollView
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight = "1">
+
+        <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+            <!-- INFORMAÇÕES CONTATO 1 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contato 1:"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactName1"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:hint="Nome do 1° contato" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DDD:"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactCellPhoneDDD1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="81"
+                    android:ems="2"
+                    android:inputType="number" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Número:"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactCellPhoneNumber1"
+                    android:layout_width="245dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Número do celular"
+                    android:ems="9"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-mail"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactEmail1"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Digite seu email"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"/>
+            </LinearLayout>
+            <!-- FIM INFORMAÇÕES CONTATO 1 -->
+
+            <!-- INFORMAÇÕES CONTATO 2 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contato 2:"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactName2"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:hint="Nome do 2° contato" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DDD:"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactCellPhoneDDD2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="81"
+                    android:ems="2"
+                    android:inputType="number" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Número:"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactCellPhoneNumber2"
+                    android:layout_width="245dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Número do celular"
+                    android:ems="9"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-mail"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactEmail2"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Digite seu email"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"/>
+            </LinearLayout>
+            <!-- FIM INFORMAÇÕES CONTATO 2 -->
+
+            <!-- INFORMAÇÕES CONTATO 3 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contato 3:"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactName3"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="20dp"
+                    android:hint="Nome do 3° contato" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DDD:"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactCellPhoneDDD3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="81"
+                    android:ems="2"
+                    android:inputType="number" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Número:"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactCellPhoneNumber3"
+                    android:layout_width="245dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Número do celular"
+                    android:ems="9"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="E-mail"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/colorSnow"/>
+                <EditText
+                    android:id="@+id/editTextContactEmail3"
+                    android:layout_width="320dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="Digite seu email"
+                    android:ems="10"
+                    android:inputType="textEmailAddress"/>
+            </LinearLayout>
+            <!-- FIM INFORMAÇÕES CONTATO 3 -->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp">
+
+            <Button
+                android:id="@+id/buttonCancel"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:background="@drawable/botao"
+                android:text="Cancelar"
+                android:layout_marginLeft="50dp"
+                android:textColor="@color/colorSnow"
+                android:textStyle="bold"
+                android:onClick="cancel"
+                />
+
+            <Button
+                android:id="@+id/buttonSaveContacts"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
+                android:background="@drawable/botao"
+                android:text="Salvar"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorSnow"
+                android:textStyle="bold"
+                android:onClick="saveContacts"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
+</LinearLayout>
