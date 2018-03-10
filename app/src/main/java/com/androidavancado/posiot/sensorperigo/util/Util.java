@@ -132,8 +132,6 @@ public class Util {
         return isCellPhoneNumber;
     }
 
-
-
     private EditText mUsuario;
     private EditText mSenha;
 

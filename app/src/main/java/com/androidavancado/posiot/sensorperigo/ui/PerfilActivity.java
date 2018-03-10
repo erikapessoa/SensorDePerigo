@@ -13,12 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidavancado.posiot.sensorperigo.R;
-import com.androidavancado.posiot.sensorperigo.model.CellPhone;
 import com.androidavancado.posiot.sensorperigo.model.PersonalIDs;
 import com.androidavancado.posiot.sensorperigo.model.User;
 import com.androidavancado.posiot.sensorperigo.util.Util;
 
-import java.net.PasswordAuthentication;
 import java.util.regex.Pattern;
 
 
@@ -30,6 +28,8 @@ public class PerfilActivity extends AppCompatActivity {
     private RadioGroup mTextSexo;
     private EditText mTextNacionalidade;
     private EditText mTextEstadoCivil;
+    private EditText mTextDdd;
+    private EditText mTextTelefone;
     private EditText mEmail;
     private EditText mTextSenha;
 
@@ -39,11 +39,6 @@ public class PerfilActivity extends AppCompatActivity {
     private EditText mTextOrgEm;
     private EditText mTextDataExp;
     private EditText mTextUF;
-
-    private CellPhone mCell;
-    private EditText mTextDdd;
-    private EditText mTextTelefone;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,23 +64,15 @@ public class PerfilActivity extends AppCompatActivity {
         mTextSenha = findViewById(R.id.editTextSenha);
 
         mUser.setmName(mTextNome.getText().toString());
-        mUser.setmSex(((char) mTextSexo.getCheckedRadioButtonId()));
         mUser.setmMaritalStatus(mTextEstadoCivil.getText().toString());
         mUser.setmNationality(mTextNacionalidade.getText().toString());
 
-        String UserAux = mEmail.getText().toString();
-        char[] SenhaAux = mTextSenha.getText().toString().toCharArray();
-        mUser.setmPasswordAuthetication(new PasswordAuthentication(UserAux,SenhaAux));
 
         mIDs.setmCPF(Long.parseLong(mTextCPF.getText().toString()));
         mIDs.setmRG(Long.parseLong(mTextRG.getText().toString()));
         mIDs.setmRG_UF(mTextRG.getText().toString());
         mIDs.setmRG_mInstitutionEmitter(mTextOrgEm.getText().toString());
         // Falta Calendar mRG_ExpeditionDate
-
-        mCell.setmDDD(Integer.parseInt(mTextDdd.getText().toString()));
-        mCell.setmNumber(mTextTelefone.getText().toString().toCharArray());
-
 
 
         if(Util.validateEmail(mEmail.getText().toString().trim())){
