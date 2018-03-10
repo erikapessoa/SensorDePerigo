@@ -51,7 +51,7 @@ public class CellPhone {
      * @return
      */
     public String charToStringNumber() {
-        return mNumber.toString();
+        return String.valueOf(mNumber);
     }
 
 

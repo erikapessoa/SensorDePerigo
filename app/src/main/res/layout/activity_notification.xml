@@ -63,7 +63,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
-                    android:hint="Nome do 1° contato" />
+                    android:hint="Nome do 1° contato"
+                    android:text="Erika"/>
             </LinearLayout>
 
             <LinearLayout
@@ -87,7 +88,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_marginTop="10dp"
                     android:hint="81"
                     android:ems="2"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="81"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,7 +107,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_marginTop="10dp"
                     android:hint="Número do celular"
                     android:ems="9"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="981818181"/>
             </LinearLayout>
 
             <LinearLayout
@@ -129,7 +132,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_marginTop="10dp"
                     android:hint="Digite seu email"
                     android:ems="10"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    android:text="erika@gmail"/>
             </LinearLayout>
             <!-- FIM INFORMAÇÕES CONTATO 1 -->
 
@@ -153,7 +157,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
-                    android:hint="Nome do 2° contato" />
+                    android:hint="Nome do 2° contato"
+                    android:text="Dani"/>
             </LinearLayout>
 
             <LinearLayout
@@ -177,7 +182,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_marginTop="10dp"
                     android:hint="81"
                     android:ems="2"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="81"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -195,7 +201,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_marginTop="10dp"
                     android:hint="Número do celular"
                     android:ems="9"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="982828282"/>
             </LinearLayout>
 
             <LinearLayout
@@ -219,7 +226,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_marginTop="10dp"
                     android:hint="Digite seu email"
                     android:ems="10"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    android:text="dani@gmail"/>
             </LinearLayout>
             <!-- FIM INFORMAÇÕES CONTATO 2 -->
 
@@ -243,7 +251,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="20dp"
-                    android:hint="Nome do 3° contato" />
+                    android:hint="Nome do 3° contato"
+                    android:text="Anderson"/>
             </LinearLayout>
 
             <LinearLayout
@@ -267,7 +276,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_marginTop="10dp"
                     android:hint="81"
                     android:ems="2"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="81" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -285,7 +295,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_marginTop="10dp"
                     android:hint="Número do celular"
                     android:ems="9"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:text="983838383" />
             </LinearLayout>
 
             <LinearLayout
@@ -309,7 +320,8 @@ tools:context="com.androidavancado.posiot.sensorperigo.ui.NotificationActivity">
                     android:layout_marginTop="10dp"
                     android:hint="Digite seu email"
                     android:ems="10"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    android:text="anderson@gmail"  />
             </LinearLayout>
             <!-- FIM INFORMAÇÕES CONTATO 3 -->
 
