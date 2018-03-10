@@ -34,6 +34,9 @@ public class PerfilActivity extends AppCompatActivity {
     private EditText mDiaNasc;
     private EditText mMesNasc;
     private EditText mAnoNasc;
+    private EditText mDiaExp;
+    private EditText mMesExp;
+    private EditText mAnoExp;
 
     private PersonalIDs mIDs;
     private EditText mTextCPF;
@@ -69,14 +72,34 @@ public class PerfilActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.editTextEmail);
         mTextSenha = findViewById(R.id.editTextSenha);
 
-        mDiaNasc = findViewById(R.id.dia);
-        mMesNasc = findViewById(R.id.mes);
-        mAnoNasc = findViewById(R.id.ano);
-
+        mDiaNasc = findViewById(R.id.editTextDiaNasc);
+        mMesNasc = findViewById(R.id.editTextMesNasc);
+        mAnoNasc = findViewById(R.id.editTextAnoNasc);
         int diaNasc, mesNasc, anoNasc;
         diaNasc = Integer.parseInt(mDiaNasc.getText().toString());
         mesNasc = Integer.parseInt(mMesNasc.getText().toString());
         anoNasc = Integer.parseInt(mAnoNasc.getText().toString());
+
+        mDiaExp = findViewById(R.id.editTextDiaExp);
+        mMesExp = findViewById(R.id.editTextMesExp);
+        mAnoExp = findViewById(R.id.editTextAnoExp);
+        int diaExp, mesExp, anoExp;
+        diaExp = Integer.parseInt(mDiaExp.getText().toString());
+        mesExp = Integer.parseInt(mMesExp.getText().toString());
+        anoExp = Integer.parseInt(mAnoExp.getText().toString());
+
+        // Validações de Campo
+
+        if(!Util.validateEmail(mEmail.getText().toString().trim())){
+
+            Toast.makeText(getApplicationContext(), "Endereço de Email Inválido", Toast.LENGTH_SHORT).show();
+
+        }
+
+        if(!Util.validateCPF(mTextCPF.getText().toString()))
+        {
+            Toast.makeText(getApplicationContext(), "CPF Inválido", Toast.LENGTH_SHORT).show();
+        }
 
 
 
@@ -85,6 +108,7 @@ public class PerfilActivity extends AppCompatActivity {
         mUser.setmMaritalStatus(mTextEstadoCivil.getText().toString());
         mUser.setmNationality(mTextNacionalidade.getText().toString());
         mUser.setmDateOfBirth(Util.mountDate(diaNasc, mesNasc, anoNasc));
+        mIDs.setmRG_ExpeditionDate(Util.mountDate(diaExp, mesExp, anoExp));
 
         String UserAux = mEmail.getText().toString();
         char[] SenhaAux = mTextSenha.getText().toString().toCharArray();
@@ -100,20 +124,6 @@ public class PerfilActivity extends AppCompatActivity {
         mCell.setmNumber(mTextTelefone.getText().toString().toCharArray());
 
 
-
-        if(Util.validateEmail(mEmail.getText().toString().trim())){
-
-
-            //Toast.makeText(getApplicationContext(), "Endereço de Email Válido", Toast.LENGTH_SHORT).show();
-
-        }else{
-            Toast.makeText(getApplicationContext(), "Endereço de Email Inválido", Toast.LENGTH_SHORT).show();
-        }
-
-        if(!Util.validateCPF(mTextCPF.getText().toString()))
-        {
-            Toast.makeText(getApplicationContext(), "CPF Inválido", Toast.LENGTH_SHORT).show();
-        }
 
     }
 
