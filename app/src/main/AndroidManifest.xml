@@ -10,6 +10,7 @@
 
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -28,18 +29,12 @@
         <activity android:name=".ui.MainMenuActivity" />
         <activity android:name=".ui.NotificationActivity" />
 
-        <service
-            android:name=".service.IKnotServiceConnection"
-            android:enabled="true"
-            android:exported="true" />
+
         <service
             android:name=".service.KnotIntegrationService"
             android:enabled="true"
             android:exported="true" />
-        <service
-            android:name=".service.ServiceBinder"
-            android:enabled="true"
-            android:exported="true" />
+
         <service
             android:name=".service.NotificationService"
             android:enabled="true"
