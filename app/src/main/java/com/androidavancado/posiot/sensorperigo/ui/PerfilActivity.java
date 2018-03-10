@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.androidavancado.posiot.sensorperigo.R;
 import com.androidavancado.posiot.sensorperigo.model.PersonalIDs;
 import com.androidavancado.posiot.sensorperigo.model.User;
+import com.androidavancado.posiot.sensorperigo.util.Util;
 
 import java.util.regex.Pattern;
 
@@ -23,12 +24,10 @@ public class PerfilActivity extends AppCompatActivity {
 
     private User mUser;
     private EditText mTextNome;
-    private EditText mTextDatNasc;
-    private EditText mTextCPF;
-    private EditText mTextRG;
-    private EditText mTextOrgEm;
-    private EditText mTextDataExp;
-    private EditText mTextUF;
+  //  private EditText mTextDatNasc;
+    private EditText mDiaNasc;
+    private EditText mMesNasc;
+    private EditText mAnoNasc;
     private RadioGroup mTextSexo;
     private EditText mTextNacionalidade;
     private EditText mTextEstadoCivil;
@@ -37,19 +36,27 @@ public class PerfilActivity extends AppCompatActivity {
     private EditText mEmail;
     private EditText mTextSenha;
 
-
     private PersonalIDs mIDs;
-    private EditText mTextNome;
-    private EditText mTextDatNasc;
-
+    private EditText mTextCPF;
+    private EditText mTextRG;
+    private EditText mTextOrgEm;
+    private EditText mTextDataExp;
+    private EditText mTextUF;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+    }
+
+    public void Salvar(View v) {
 
         mTextNome = findViewById(R.id.editTextNome);
-        mTextDatNasc = findViewById(R.id.editTextNasc);
+       // mTextDatNasc = findViewById(R.id.editTextNasc);
+        mDiaNasc = findViewById(R.id.dia);
+        mMesNasc = findViewById(R.id.mes);
+        mAnoNasc = findViewById(R.id.ano);
+
         mTextCPF = findViewById(R.id.editTextCPF);
         mTextRG = findViewById(R.id.editTextRG);
         mTextOrgEm = findViewById(R.id.editTextOrgao);
@@ -63,21 +70,41 @@ public class PerfilActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.editTextEmail);
         mTextSenha = findViewById(R.id.editTextSenha);
 
-
-
+        //conversão de datas em String
+        int diaNasc, mesNasc, anoNasc;
+        diaNasc = Integer.parseInt(mDiaNasc.getText().toString());
+        mesNasc = Integer.parseInt(mMesNasc.getText().toString());
+        anoNasc = Integer.parseInt(mAnoNasc.getText().toString());
 
         mUser.setmName(mTextNome.getText().toString());
-        mUser.setmDateOfBirth(mText);
+        mUser.setmMaritalStatus(mTextEstadoCivil.getText().toString());
+        mUser.setmNationality(mTextNacionalidade.getText().toString());
+        mUser.setmDateOfBirth(Util.mountDate(diaNasc, mesNasc, anoNasc));
+
+        mIDs.setmCPF(Long.parseLong(mTextCPF.getText().toString()));
+        mIDs.setmRG(Long.parseLong(mTextRG.getText().toString()));
+        mIDs.setmRG_UF(mTextRG.getText().toString());
+        mIDs.setmRG_mInstitutionEmitter(mTextOrgEm.getText().toString());
 
 
 
+        // Falta Calendar mRG_ExpeditionDate
 
-        if (mUser != null) {
 
-            Log.i("dados do usuário", "Entrei");
-            mTextNome.setText(mUser.getmName());
+        if(Util.validateEmail(mEmail.getText().toString().trim())){
 
+
+            //Toast.makeText(getApplicationContext(), "Endereço de Email Válido", Toast.LENGTH_SHORT).show();
+
+        }else{
+            Toast.makeText(getApplicationContext(), "Endereço de Email Inválido", Toast.LENGTH_SHORT).show();
         }
+
+        if(!Util.validateCPF(mTextCPF.getText().toString()))
+        {
+            Toast.makeText(getApplicationContext(), "Endereço de Email Inválido", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
@@ -86,32 +113,6 @@ public class PerfilActivity extends AppCompatActivity {
 
     }
 
-
-    public void Salvar(View v) {
-
-        if(isValidEmaillId(mEmail.getText().toString().trim())){
-            // Salvar no
-
-            Toast.makeText(getApplicationContext(), "Endereço de Email Válido", Toast.LENGTH_SHORT).show();
-
-
-
-        }else{
-            Toast.makeText(getApplicationContext(), "Endereço de Email Inválido", Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-
-    private boolean isValidEmaillId(String email){
-
-        return Pattern.compile("^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$").matcher(email).matches();
-    }
 
 
 }

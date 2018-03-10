@@ -23,6 +23,9 @@ public class Constants {
     public static final String HELP_ME = "Estou precisando de ajuda urgente! Me encontro no seguinte local: ";
     public static final String MAP_URL_LOCALIZATION = "https://www.google.com/maps/?q= ";
 
+    public static final String ARCHIVE_PREF = "ArquivoPreferencia";
+
+
 
 
 

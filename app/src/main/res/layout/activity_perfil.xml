@@ -155,9 +155,28 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:textColor="@color/colorSnow"/>
+
         <EditText
-            android:id="@+id/editTextDataEx"
-            android:layout_width="110dp"
+            android:id="@+id/dia"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="10dp"
+            android:hint="Digite a data"
+            android:ems="10"
+            android:inputType="date" />
+        <EditText
+            android:id="@+id/mes"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="10dp"
+            android:hint="Digite a data"
+            android:ems="10"
+            android:inputType="date" />
+        <EditText
+            android:id="@+id/ano"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="10dp"
