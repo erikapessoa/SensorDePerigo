@@ -24,7 +24,10 @@ public class PerfilActivity extends AppCompatActivity {
 
     private User mUser;
     private EditText mTextNome;
-    private EditText mTextDatNasc;
+  //  private EditText mTextDatNasc;
+    private EditText mDiaNasc;
+    private EditText mMesNasc;
+    private EditText mAnoNasc;
     private RadioGroup mTextSexo;
     private EditText mTextNacionalidade;
     private EditText mTextEstadoCivil;
@@ -49,7 +52,11 @@ public class PerfilActivity extends AppCompatActivity {
     public void Salvar(View v) {
 
         mTextNome = findViewById(R.id.editTextNome);
-        mTextDatNasc = findViewById(R.id.editTextNasc);
+       // mTextDatNasc = findViewById(R.id.editTextNasc);
+        mDiaNasc = findViewById(R.id.dia);
+        mMesNasc = findViewById(R.id.mes);
+        mAnoNasc = findViewById(R.id.ano);
+
         mTextCPF = findViewById(R.id.editTextCPF);
         mTextRG = findViewById(R.id.editTextRG);
         mTextOrgEm = findViewById(R.id.editTextOrgao);
@@ -63,15 +70,24 @@ public class PerfilActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.editTextEmail);
         mTextSenha = findViewById(R.id.editTextSenha);
 
+        //conversão de datas em String
+        int diaNasc, mesNasc, anoNasc;
+        diaNasc = Integer.parseInt(mDiaNasc.getText().toString());
+        mesNasc = Integer.parseInt(mMesNasc.getText().toString());
+        anoNasc = Integer.parseInt(mAnoNasc.getText().toString());
+
         mUser.setmName(mTextNome.getText().toString());
         mUser.setmMaritalStatus(mTextEstadoCivil.getText().toString());
         mUser.setmNationality(mTextNacionalidade.getText().toString());
-
+        mUser.setmDateOfBirth(Util.mountDate(diaNasc, mesNasc, anoNasc));
 
         mIDs.setmCPF(Long.parseLong(mTextCPF.getText().toString()));
         mIDs.setmRG(Long.parseLong(mTextRG.getText().toString()));
         mIDs.setmRG_UF(mTextRG.getText().toString());
         mIDs.setmRG_mInstitutionEmitter(mTextOrgEm.getText().toString());
+
+
+
         // Falta Calendar mRG_ExpeditionDate
 
 
@@ -81,6 +97,11 @@ public class PerfilActivity extends AppCompatActivity {
             //Toast.makeText(getApplicationContext(), "Endereço de Email Válido", Toast.LENGTH_SHORT).show();
 
         }else{
+            Toast.makeText(getApplicationContext(), "Endereço de Email Inválido", Toast.LENGTH_SHORT).show();
+        }
+
+        if(!Util.validateCPF(mTextCPF.getText().toString()))
+        {
             Toast.makeText(getApplicationContext(), "Endereço de Email Inválido", Toast.LENGTH_SHORT).show();
         }
 
