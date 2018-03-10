@@ -1,5 +1,6 @@
 package com.androidavancado.posiot.sensorperigo.ui;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,42 +11,37 @@ import android.widget.Toast;
 
 import com.androidavancado.posiot.sensorperigo.R;
 import com.androidavancado.posiot.sensorperigo.util.Constants;
+import com.androidavancado.posiot.sensorperigo.util.Util;
 
 public class LoginActivity extends AppCompatActivity {
 
+    Intent it = getIntent();
 
-    private EditText mUsuario;
-    private EditText mSenha;
-    private Button mBotaoSalvar;
+    String mUser = it.getStringExtra("mUsuario");
+    String mSenha = it.getStringExtra("mSenha");
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+        if(!Util.verifyUser(mUser, mSenha))
+        {
+            Toast.makeText(this, "Usuário Inexistente! Tente novamente ou cadastre-se!", Toast.LENGTH_LONG).show();
+            finish();
+        }
+        else
+        {
+            Intent acesso = new Intent(this, MainMenuActivity.class);
+            setResult(RESULT_OK, it);
+            startActivity(acesso);
+            finish();
 
-        mUsuario = (EditText) findViewById(R.id.usuarioText);
-        mSenha = (EditText) findViewById(R.id.password);
-        mBotaoSalvar = (Button) findViewById(R.id.sign_in_button);
-
-       // mUsuario.setText(settings.getString("login", ""));
-      //  mSenha.setText(settings.getString("senha", ""));
-
-        mBotaoSalvar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if(mUsuario.getText().toString().equals("") || mSenha.getText().toString().equals("") ){
-                    Toast.makeText(getApplicationContext(), "Nenhum campos pode estar vazio", Toast.LENGTH_SHORT);
-                } else{
-
-                }
-            }
-        });
-
-
+        }
 
     }
+
+
 
 }

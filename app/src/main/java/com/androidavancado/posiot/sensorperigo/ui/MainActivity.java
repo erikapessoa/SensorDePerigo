@@ -36,10 +36,25 @@ public class MainActivity extends AppCompatActivity {
 
         } else {
 
+
             Intent it = new Intent(this, LoginActivity.class);
-            startActivity(it);
+            it.putExtra("mUsuario", mUsuario.getText().toString());
+            it.putExtra("mSenha", mSenha.getText().toString());
+            startActivityForResult(it, 1);
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == 1) {
+            finish();
+        }
+
+    }
+
     public void abrirPerfil(View v) {
         Intent it = new Intent(this, PerfilActivity.class);
         startActivity(it);
