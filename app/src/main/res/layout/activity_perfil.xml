@@ -66,30 +66,30 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/colorSnow"/>
         <EditText
-            android:id="@+id/dia"
+            android:id="@+id/editTextDiaNasc"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="10dp"
-            android:hint="Digite a data"
+            android:hint="dia"
             android:ems="10"
             android:inputType="date" />
         <EditText
-            android:id="@+id/mes"
+            android:id="@+id/editTextMesNasc"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="10dp"
-            android:hint="Digite a data"
+            android:hint="mes"
             android:ems="10"
             android:inputType="date" />
         <EditText
-            android:id="@+id/ano"
+            android:id="@+id/editTextAnoNasc"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="10dp"
-            android:hint="Digite a data"
+            android:hint="ano"
             android:ems="10"
             android:inputType="date" />
     </LinearLayout>
@@ -175,15 +175,32 @@
             android:textColor="@color/colorSnow"/>
 
         <EditText
-            android:id="@+id/editTextDataEx"
-            android:layout_width="100dp"
+            android:id="@+id/editTextDiaExp"
+            android:layout_width="35dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="10dp"
-            android:hint="Digite a data"
+            android:hint="dia"
             android:ems="10"
             android:inputType="date" />
-
+        <EditText
+            android:id="@+id/editTextMesExp"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="10dp"
+            android:hint="mes"
+            android:ems="10"
+            android:inputType="date" />
+        <EditText
+            android:id="@+id/editTextAnoExp"
+            android:layout_width="35dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginTop="10dp"
+            android:hint="ano"
+            android:ems="10"
+            android:inputType="date"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
