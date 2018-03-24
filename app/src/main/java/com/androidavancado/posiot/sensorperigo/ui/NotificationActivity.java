@@ -89,6 +89,7 @@ public class NotificationActivity extends AppCompatActivity {
 
             Contact contact1 = new Contact(nameContact1, emailContact1, cellphone);
 
+            cellphone = new CellPhone();
             dDD = Integer.parseInt(cellPhoneDDDContact2);
             cellphoneNumber = cellPhoneNumberContact2.toCharArray();
             cellphone.setmDDD(dDD);
@@ -98,6 +99,7 @@ public class NotificationActivity extends AppCompatActivity {
 
             Contact contact2 = new Contact(nameContact2, emailContact2, cellphone);
 
+            cellphone = new CellPhone();
             dDD = Integer.parseInt(cellPhoneDDDContact3);
             cellphoneNumber = cellPhoneNumberContact3.toCharArray();
             cellphone.setmDDD(dDD);
