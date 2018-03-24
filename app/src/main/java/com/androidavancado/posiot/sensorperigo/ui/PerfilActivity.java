@@ -100,35 +100,49 @@ public class PerfilActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "CPF Inválido", Toast.LENGTH_SHORT).show();
         }
 
+        mIDs = new PersonalIDs(Long.parseLong(mTextRG.getText().toString()),Long.parseLong(mTextCPF.getText().toString()));
+        mIDs.setmRG_ExpeditionDate(Util.mountDate(diaExp, mesExp, anoExp));
+        mIDs.setmRG_UF(mTextRG.getText().toString());
+        mIDs.setmRG_mInstitutionEmitter(mTextOrgEm.getText().toString());
+        mIDs.setmCPF(Long.parseLong(mTextCPF.getText().toString()));
 
+
+        // Falta Calendar mRG_ExpeditionDate
+        mCell = new CellPhone();
+        mCell.setmDDD(Integer.parseInt(mTextDdd.getText().toString()));
+        mCell.setmNumber(mTextTelefone.getText().toString().toCharArray());
+
+
+
+        String UserAux = mEmail.getText().toString();
+        char[] SenhaAux = mTextSenha.getText().toString().toCharArray();
+        PasswordAuthentication pass = new PasswordAuthentication(UserAux, SenhaAux);
+         mUser = new User(UserAux, pass);
 
         mUser.setmName(mTextNome.getText().toString());
         mUser.setmSex(((char) mTextSexo.getCheckedRadioButtonId()));
         mUser.setmMaritalStatus(mTextEstadoCivil.getText().toString());
         mUser.setmNationality(mTextNacionalidade.getText().toString());
         mUser.setmDateOfBirth(Util.mountDate(diaNasc, mesNasc, anoNasc));
-        mIDs.setmRG_ExpeditionDate(Util.mountDate(diaExp, mesExp, anoExp));
+        mUser.setmRGandCPF(mIDs);
+        mUser.setmCellPhone(mCell);
+        mUser.setmEmail(UserAux);
+        //mUser.setmPasswordAuthetication();
 
-        String UserAux = mEmail.getText().toString();
-        char[] SenhaAux = mTextSenha.getText().toString().toCharArray();
-        mUser.setmPasswordAuthetication(new PasswordAuthentication(UserAux,SenhaAux));
 
-        mIDs.setmCPF(Long.parseLong(mTextCPF.getText().toString()));
-        mIDs.setmRG(Long.parseLong(mTextRG.getText().toString()));
-        mIDs.setmRG_UF(mTextRG.getText().toString());
-        mIDs.setmRG_mInstitutionEmitter(mTextOrgEm.getText().toString());
-        // Falta Calendar mRG_ExpeditionDate
 
-        mCell.setmDDD(Integer.parseInt(mTextDdd.getText().toString()));
-        mCell.setmNumber(mTextTelefone.getText().toString().toCharArray());
 
+
+
+        Util.registerUser(mUser); //NOVO
+        finish(); //NOVO
 
 
     }
 
 
     public void Cancelar(View v) {
-
+        finish();
 
     }
 

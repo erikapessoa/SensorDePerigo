@@ -1,18 +1,12 @@
 package com.androidavancado.posiot.sensorperigo.ui;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.androidavancado.posiot.sensorperigo.R;
-import com.androidavancado.posiot.sensorperigo.ui.LoginActivity;
-import com.androidavancado.posiot.sensorperigo.ui.MainMenuActivity;
-import com.androidavancado.posiot.sensorperigo.ui.PerfilActivity;
+import com.androidavancado.posiot.sensorperigo.util.Util;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,14 +28,28 @@ public class MainActivity extends AppCompatActivity {
         if (mUsuario.getText().toString().equals("") || mSenha.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(), "Nenhum campos pode estar vazio", Toast.LENGTH_SHORT).show();
 
-        } else {
+        } else if(!Util.verifyUser(mUsuario.getText().toString(), mSenha.getText().toString())){
+
+                Toast.makeText(this, "Usuário Inexistente! Tente novamente ou cadastre-se!", Toast.LENGTH_LONG).show();
+               // finish();
+            }
+            else
+            {
+                Intent acesso = new Intent(this, MainMenuActivity.class);
+
+                startActivity(acesso);
+                finish();
+
+            }
 
 
-            Intent it = new Intent(this, LoginActivity.class);
-            it.putExtra("mUsuario", mUsuario.getText().toString());
-            it.putExtra("mSenha", mSenha.getText().toString());
-            startActivityForResult(it, 1);
-        }
+
+//            Intent it = new Intent(this, LoginActivity.class);
+  //          it.putExtra("mUsuario", mUsuario.getText().toString());
+    //        it.putExtra("mSenha", mSenha.getText().toString());
+      //      startActivity(it);
+           // startActivityForResult(it, 1);
+    //    }
     }
 
     @Override

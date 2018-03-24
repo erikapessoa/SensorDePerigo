@@ -1,5 +1,6 @@
 package com.androidavancado.posiot.sensorperigo.util;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.androidavancado.posiot.sensorperigo.App;
@@ -9,6 +10,7 @@ import com.androidavancado.posiot.sensorperigo.model.PersonalIDs;
 import com.androidavancado.posiot.sensorperigo.model.User;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -41,9 +43,13 @@ public class Util {
      * @param year
      * @return
      */
+
     public static Calendar mountDate(int day, int month, int year) {
 
-        Calendar date = null;
+        Calendar date = Calendar.getInstance();
+
+        date.set(year, month, day);
+
 
         return date;
     }
@@ -162,9 +168,21 @@ public class Util {
     // Verificar login do usuário no SheredPreferences
     public static boolean verifyUser (String email, String password) {
 
-        boolean isOk = false;
+        final Context contx = App.getContext();
+        String verifyEmail, verifyPassword;
 
-        return isOk;
+        SharedPreferences sensorPerigoPreferences = App.getContext().getSharedPreferences(Constants.SENSOR_PERIGO_PREF, contx.MODE_PRIVATE);
+        verifyEmail = sensorPerigoPreferences.getString("email", "");
+        verifyPassword = sensorPerigoPreferences.getString("senha", "");
+
+        if((verifyEmail.equals(email)) && (verifyPassword.equals(password)))
+            return true;
+        else
+            return  false;
+
+      //  boolean isOk = false;
+
+        //return isOk;
         // Recuperar os dados salvos
 
         /*

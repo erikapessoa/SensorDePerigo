@@ -25,4 +25,9 @@ public class MainMenuActivity extends AppCompatActivity {
 
     }
 
+    public void AbrirNotificacao(View v)
+    {
+
+    }
+
 }
