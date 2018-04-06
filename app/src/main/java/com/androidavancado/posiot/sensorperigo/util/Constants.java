@@ -24,6 +24,11 @@ public class Constants {
     public static final String DEFAULT_TOKEN = "c7ef482fdbce034f5c44c7df3c7624c59e5ab9c5";
     public static final String EXTRA_DEVICE_UUID = "DEVICE_UUID";
 
+    public static final String PREFERENCES_NAME = "knot_preference";
+    public static final String KEY_END_POINT = "http://knot-test.cesar.org.br:3000";
+    public static final String KEY_UUID = "USER_UUID";
+    public static final String KEY_TOKEN = "USER_TOKEN";
+
 
     public static final char FEMININ_SEX = 'F';
     public static final char MASCULIN_SEX = 'M';
