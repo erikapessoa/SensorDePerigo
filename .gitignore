@@ -10,3 +10,7 @@
 /captures
 .externalNativeBuild
 local.properties
+
+knot-android-library-debug/build\.gradle
+
+knot-android-library-debug/knot-android-library-debug\.aar

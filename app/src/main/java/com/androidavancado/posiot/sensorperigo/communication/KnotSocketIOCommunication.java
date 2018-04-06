@@ -24,6 +24,12 @@ import br.org.cesar.knot.lib.util.DateUtils;
 
 /**
  * Created by erika on 25/02/18.
+ *
+ * knot-lab5.local/
+ * email:5@knot
+ * senha:123456
+ *
+ *
  */
 
 public class KnotSocketIOCommunication implements IKnotCommunication  {

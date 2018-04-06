@@ -1,5 +1,6 @@
 package com.androidavancado.posiot.sensorperigo.ui;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 import com.androidavancado.posiot.sensorperigo.R;
 import com.androidavancado.posiot.sensorperigo.model.CellPhone;
 import com.androidavancado.posiot.sensorperigo.model.Contact;
+import com.androidavancado.posiot.sensorperigo.service.SendSMS;
 import com.androidavancado.posiot.sensorperigo.util.Logger;
 import com.androidavancado.posiot.sensorperigo.util.Util;
 
@@ -119,6 +121,7 @@ public class NotificationActivity extends AppCompatActivity {
 
             Toast.makeText(getApplicationContext(), "Contatos SALVOS com sucesso!",
                     Toast.LENGTH_LONG).show();
+
         }
     }
 

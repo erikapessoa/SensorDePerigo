@@ -6,11 +6,23 @@ package com.androidavancado.posiot.sensorperigo.util;
 
 public class Constants {
 
+    /*
+    User credentials
+    UUID 14966c4d-c321-4886-bfbd-780424660000
+    Token c7ef482fdbce034f5c44c7df3c7624c59e5ab9c5
+
+    Gateway credentials
+    UUID 5ae20ba3-3ff0-444c-bfca-447083cb0000
+    Token d4c2f316b2b1e8baf7d2b573a21700cdf53daaaa
+    */
+
+
     public static final String APP_NAME = "Sensor de Perigo";
 
     public static final String KNOT_URL = "http://knot-test.cesar.org.br:3000";
-    public static final String DEFAULT_UUID = "";
-    public static final String DEFAULT_TOKEN = "";
+    public static final String DEFAULT_UUID = "14966c4d-c321-4886-bfbd-780424660000";
+    public static final String DEFAULT_TOKEN = "c7ef482fdbce034f5c44c7df3c7624c59e5ab9c5";
+    public static final String EXTRA_DEVICE_UUID = "DEVICE_UUID";
 
 
     public static final char FEMININ_SEX = 'F';

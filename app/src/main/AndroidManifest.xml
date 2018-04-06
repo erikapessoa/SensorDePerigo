@@ -3,11 +3,12 @@
     package="com.androidavancado.posiot.sensorperigo">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <uses-feature android:name="android.hardware.location.gps" />
 
     <uses-permission android:name="android.permission.SEND_SMS" />
 
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:name=".App"
@@ -29,16 +30,19 @@
         <activity android:name=".ui.MainMenuActivity" />
         <activity android:name=".ui.NotificationActivity" />
 
-
         <service
             android:name=".service.KnotIntegrationService"
             android:enabled="true"
             android:exported="true" />
 
-        <service
-            android:name=".service.NotificationService"
+       <receiver
+            android:name=".service.StartKnotServiceReceiver"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

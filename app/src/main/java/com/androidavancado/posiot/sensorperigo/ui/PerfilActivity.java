@@ -123,6 +123,11 @@ public class PerfilActivity extends AppCompatActivity {
         mCell.setmNumber(mTextTelefone.getText().toString().toCharArray());
 
 
+        //TERMINOU DE SALVAR, PASSA DIRETO PARA O CADASTRO DOS CONTATOS PARA NOTIFICAÇÃO
+
+        Intent it = new Intent(this, NotificationActivity.class);
+        startActivity(it);
+
 
     }
 
