@@ -1,29 +1,20 @@
 package com.androidavancado.posiot.sensorperigo.service;
 
-import android.app.IntentService;
 import android.app.Service;
-import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
+import android.content.ServiceConnection;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.telephony.SmsManager;
-import android.util.Log;
 
-import com.androidavancado.posiot.sensorperigo.communication.KnotSocketIOCommunication;
 import com.androidavancado.posiot.sensorperigo.model.ButtonData;
+import com.androidavancado.posiot.sensorperigo.model.ButtonDevice;
+import com.androidavancado.posiot.sensorperigo.util.Constants;
 import com.androidavancado.posiot.sensorperigo.util.Logger;
 import com.androidavancado.posiot.sensorperigo.util.PoolingTimer;
-import com.androidavancado.posiot.sensorperigo.util.Util;
 
 import java.util.List;
-import java.util.Locale;
 
 import br.org.cesar.knot.lib.connection.FacadeConnection;
 import br.org.cesar.knot.lib.exception.InvalidDeviceOwnerStateException;
@@ -31,7 +22,7 @@ import br.org.cesar.knot.lib.exception.KnotException;
 import br.org.cesar.knot.lib.model.KnotList;
 import br.org.cesar.knot.lib.model.KnotQueryData;
 
-public class KnotIntegrationService extends Service implements IKnotServiceConnection, OnDataChangedListener {
+public class KnotIntegrationService extends Service implements IKnotServiceConnection, OnDataChangedListener, ServiceConnection {
 
     private OnDataChangedListener mListener;
 
@@ -60,6 +51,7 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
         Logger.d("ENTREI EM KnotIntegrationService método onStartCommand");
 
         super.onStartCommand(intent, flags, startId);
+        bindService(intent, this, BIND_AUTO_CREATE);
         return START_STICKY;
     }
 
@@ -131,6 +123,16 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
 
 
 
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        subscribe(deviceUUID, KnotIntegrationService.this);
+
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        //mKnotServiceConnection = null;
+    }
 
     /**
      *
@@ -173,10 +175,17 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
         @Override
         protected Object doInBackground(Object[] objects) {
 
+            List<ButtonDevice> mDevicesList = null;
+            KnotList<ButtonDevice> list = new KnotList<>(ButtonDevice.class);
             KnotList<ButtonData> listOfData = new KnotList<>(ButtonData.class);
             KnotQueryData knotQueryData = new KnotQueryData();
 
             try {
+                FacadeConnection.getInstance().setupHttp(Constants.KEY_END_POINT, Constants.KEY_UUID, Constants.KEY_TOKEN);
+                mDevicesList = FacadeConnection.getInstance().httpGetDeviceList(list);
+
+                deviceUUID = mDevicesList.get(0).getUuid();
+
                 deviceData = FacadeConnection.getInstance().httpGetDataList(deviceUUID, knotQueryData,listOfData);
 
             } catch (KnotException e) {
