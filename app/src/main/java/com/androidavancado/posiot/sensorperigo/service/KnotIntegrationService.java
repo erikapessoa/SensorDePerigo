@@ -1,26 +1,20 @@
 package com.androidavancado.posiot.sensorperigo.service;
 
 import android.app.Service;
-import android.content.Context;
+import android.content.ComponentName;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationManager;
+import android.content.ServiceConnection;
 import android.os.AsyncTask;
-import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
-import android.telephony.SmsManager;
-import android.util.Log;
 
 import com.androidavancado.posiot.sensorperigo.model.ButtonData;
+import com.androidavancado.posiot.sensorperigo.model.ButtonDevice;
+import com.androidavancado.posiot.sensorperigo.util.Constants;
+import com.androidavancado.posiot.sensorperigo.util.Logger;
 import com.androidavancado.posiot.sensorperigo.util.PoolingTimer;
-import com.androidavancado.posiot.sensorperigo.util.Util;
 
 import java.util.List;
-import java.util.Locale;
 
 import br.org.cesar.knot.lib.connection.FacadeConnection;
 import br.org.cesar.knot.lib.exception.InvalidDeviceOwnerStateException;
@@ -28,7 +22,7 @@ import br.org.cesar.knot.lib.exception.KnotException;
 import br.org.cesar.knot.lib.model.KnotList;
 import br.org.cesar.knot.lib.model.KnotQueryData;
 
-public class KnotIntegrationService extends Service implements IKnotServiceConnection{
+public class KnotIntegrationService extends Service implements IKnotServiceConnection, OnDataChangedListener, ServiceConnection {
 
     private OnDataChangedListener mListener;
 
@@ -39,48 +33,10 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
     private List<ButtonData> deviceData;
 
 
-    //##########################################
-    private static final String TAG = "TESTEGPS";
-    private LocationManager mLocationManager = null;
-    private static final int LOCATION_INTERVAL = 1000;
-    private static final float LOCATION_DISTANCE = 10f;
-
-    Location mLastLocation;
-
-    LocationListener[] mLocationListeners = new LocationListener[] {
-            new LocationListener(LocationManager.GPS_PROVIDER),
-            new LocationListener(LocationManager.NETWORK_PROVIDER)
-    };
-
-    //############################################
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return new ServiceBinder(this);
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        super.onStartCommand(intent, flags, startId);
-        return START_STICKY;
-    }
-
-    private void syncAndStartPooling() {
-        // Force a sync and reeschedule the last pooling
-        if (poolingTimer != null) {
-            poolingTimer.stopPooling();
-            poolingTimer.startPooling();
-        } else {
-            this.poolingTimer = new PoolingTimer(poolingListener);
-            poolingTimer.startPooling();
-        }
-        // Sync all data of devices
-        syncData();
-    }
-
-    private void syncData() {
-        new SyncDeviceDataTask().execute();
     }
 
     @Override
@@ -89,43 +45,28 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
         return super.onUnbind(intent);
     }
 
-    private PoolingTimer.PoolingListener poolingListener = new PoolingTimer.PoolingListener() {
-        @Override
-        public void onPoolingFinished() {
-            syncData();
-        }
-    };
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Logger.d("ENTREI EM KnotIntegrationService método onStartCommand");
+
+        super.onStartCommand(intent, flags, startId);
+        bindService(intent, this, BIND_AUTO_CREATE);
+        return START_STICKY;
+    }
+
 
     @Override
     public void subscribe(String deviceUUID, OnDataChangedListener listener) {
+
+        Logger.d("ENTREI EM KnotIntegrationService método subscribe");
+
         mListener = listener;
 
         this.deviceUUID = deviceUUID;
 
         //start pooling
         syncAndStartPooling();
-    }
-
-    private void notifyListener(List<ButtonData> deviceData){
-        if(mListener != null) {
-            mListener.onDataChanged(deviceData);
-
-            initializeLocationManager();
-            requestUpdate();
-
-            double latitude = mLastLocation.getLatitude();
-            double longitude = mLastLocation.getLongitude();
-
-            SharedPreferences prefs = this.getSharedPreferences("ArquivoPreferencia", Context.MODE_PRIVATE);
-            String nomeContato = prefs.getString("NOME_CONTATO", null);
-            String foneContato = prefs.getString("FONE_CONTATO", null);
-
-            String mensagem = Util.mensagem(nomeContato, latitude, longitude);
-
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(foneContato, null, mensagem, null, null);
-
-        }
     }
 
     @Override
@@ -141,15 +82,110 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
     }
 
 
+    private void notifyListener(List<ButtonData> deviceData){
+
+        Logger.d("ENTREI EM KnotIntegrationService método notifyListener");
+
+        if(mListener != null) {
+            mListener.onDataChanged(deviceData);
+
+        }
+    }
+
+
+    @Override
+    public void onDataChanged(List<ButtonData> deviceData) {
+
+
+        //// ESSE CÓDIGO AQUI É APENAS PRA TESTAR SE ELE TÁ RECEBENDO A MUDANÇA DE ESTADO DO BOTÃO
+        //// PRECISA DESCOMENTAR A PARTE DE ENVIAR SMS
+        Logger.d("ENTREI EM KnotIntegrationService método onDataChanged");
+
+        if (deviceData != null) {
+            ButtonData button = deviceData.get(0);
+
+            Logger.d("Valor do botão = " + button.getMCurrentValue());
+
+
+            //CASO O VALOR DO BOTÃO SEJA TRUE SIGNIFICA QUE UM PEDIDO DE SOCORRO FOI FEITO, então
+            //tenta enviar o SMS
+
+            /*
+
+            if(button.getMCurrentValue()) {
+                SendSMS.sendSMS();
+            }
+
+            */
+        }
+
+    }
+
+
+
+    @Override
+    public void onServiceConnected(ComponentName name, IBinder service) {
+        subscribe(deviceUUID, KnotIntegrationService.this);
+
+    }
+
+    @Override
+    public void onServiceDisconnected(ComponentName name) {
+        //mKnotServiceConnection = null;
+    }
+
+    /**
+     *
+     */
+    private void syncAndStartPooling() {
+        // Force a sync and reeschedule the last pooling
+        if (poolingTimer != null) {
+            poolingTimer.stopPooling();
+            poolingTimer.startPooling();
+        } else {
+            this.poolingTimer = new PoolingTimer(poolingListener);
+            poolingTimer.startPooling();
+        }
+        // Sync all data of devices
+        syncData();
+    }
+
+    /**
+     *
+     */
+    private void syncData() {
+        new SyncDeviceDataTask().execute();
+    }
+
+    /**
+     *
+     */
+
+    private PoolingTimer.PoolingListener poolingListener = new PoolingTimer.PoolingListener() {
+        @Override
+        public void onPoolingFinished() {
+            syncData();
+        }
+    };
+
+
+
     private class SyncDeviceDataTask extends AsyncTask {
 
         @Override
         protected Object doInBackground(Object[] objects) {
 
+            List<ButtonDevice> mDevicesList = null;
+            KnotList<ButtonDevice> list = new KnotList<>(ButtonDevice.class);
             KnotList<ButtonData> listOfData = new KnotList<>(ButtonData.class);
             KnotQueryData knotQueryData = new KnotQueryData();
 
             try {
+                FacadeConnection.getInstance().setupHttp(Constants.KEY_END_POINT, Constants.KEY_UUID, Constants.KEY_TOKEN);
+                mDevicesList = FacadeConnection.getInstance().httpGetDeviceList(list);
+
+                deviceUUID = mDevicesList.get(0).getUuid();
+
                 deviceData = FacadeConnection.getInstance().httpGetDataList(deviceUUID, knotQueryData,listOfData);
 
             } catch (KnotException e) {
@@ -173,76 +209,5 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
         }
 
     }
-
-    //##################################################
-    // UTILIZADO PARA PEGAR A LOCALIZAÇÃO DO USUÁRIO
-    private class LocationListener implements android.location.LocationListener
-    {
-
-
-        public LocationListener(String provider)
-        {
-            Log.e(TAG, "LocationListener " + provider);
-            mLastLocation = new Location(provider);
-        }
-
-        @Override
-        public void onLocationChanged(Location location)
-        {
-            Log.e(TAG, "onLocationChanged: " + location);
-            mLastLocation.set(location);
-        }
-
-        @Override
-        public void onProviderDisabled(String provider)
-        {
-            Log.e(TAG, "onProviderDisabled: " + provider);
-        }
-
-        @Override
-        public void onProviderEnabled(String provider)
-        {
-            Log.e(TAG, "onProviderEnabled: " + provider);
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras)
-        {
-            Log.e(TAG, "onStatusChanged: " + provider);
-        }
-    }
-
-    private void initializeLocationManager() {
-        Log.e(TAG, "initializeLocationManager");
-        if (mLocationManager == null) {
-            mLocationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
-        }
-    }
-
-    public void requestUpdate()
-    {
-        try {
-            mLocationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
-                    mLocationListeners[1]);
-        } catch (java.lang.SecurityException ex) {
-            Log.i(TAG, "fail to request location update, ignore", ex);
-        } catch (IllegalArgumentException ex) {
-            Log.d(TAG, "network provider does not exist, " + ex.getMessage());
-        }
-
-        try {
-            mLocationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
-                    mLocationListeners[0]);
-        } catch (java.lang.SecurityException ex) {
-            Log.i(TAG, "fail to request location update, ignore", ex);
-        } catch (IllegalArgumentException ex) {
-            Log.d(TAG, "gps provider does not exist " + ex.getMessage());
-        }
-    }
-
-    //##################################################
-
 
 }

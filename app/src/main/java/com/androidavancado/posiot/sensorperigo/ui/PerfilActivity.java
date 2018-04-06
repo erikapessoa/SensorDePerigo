@@ -133,6 +133,11 @@ public class PerfilActivity extends AppCompatActivity {
 
 
 
+        //TERMINOU DE SALVAR, PASSA DIRETO PARA O CADASTRO DOS CONTATOS PARA NOTIFICAÇÃO
+
+        Intent it = new Intent(this, NotificationActivity.class);
+        startActivity(it);
+
 
         Util.registerUser(mUser); //NOVO
         finish(); //NOVO
