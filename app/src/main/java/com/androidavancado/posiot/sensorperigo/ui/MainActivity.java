@@ -1,25 +1,53 @@
 package com.androidavancado.posiot.sensorperigo.ui;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.androidavancado.posiot.sensorperigo.App;
 import com.androidavancado.posiot.sensorperigo.R;
+import com.androidavancado.posiot.sensorperigo.util.Constants;
 import com.androidavancado.posiot.sensorperigo.util.Util;
 
 public class MainActivity extends AppCompatActivity {
 
     private EditText mUsuario;
     private EditText mSenha;
+    private Button mSignInBtn;
+    final Context contx = App.getContext();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        mUsuario = findViewById(R.id.usuarioText);
-        mSenha = findViewById(R.id.password);
+
+        //APENAS PARA CHAMAR O ONCLICK DO BOTÃO
+        mSignInBtn = findViewById(R.id.sign_in_button);
+        String verifyEmail, verifyPassword;
+
+        //Verificar se o usuário já existe
+        SharedPreferences sensorPerigoPreferences = App.getContext().getSharedPreferences(Constants.SENSOR_PERIGO_PREF, contx.MODE_PRIVATE);
+        verifyEmail = sensorPerigoPreferences.getString("email", "");
+        verifyPassword = sensorPerigoPreferences.getString("senha", "");
+
+        //SE JÁ EXISTE LOGIN E SENHA CADASTRADO, ENTÃO EXISTE USUÁRIO E VAI DIRETO PARA O PERFIL.
+        if(!verifyEmail.isEmpty() && !verifyPassword.isEmpty())
+        {
+            abrirPerfil(mSignInBtn);
+        }
+        else
+        {
+            setContentView(R.layout.activity_main);
+
+            mUsuario = findViewById(R.id.usuarioText);
+            mSenha = findViewById(R.id.password);
+        }
+
 
     }
 
