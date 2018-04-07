@@ -181,7 +181,8 @@ public class KnotIntegrationService extends Service implements IKnotServiceConne
             KnotQueryData knotQueryData = new KnotQueryData();
 
             try {
-                FacadeConnection.getInstance().setupHttp(Constants.KEY_END_POINT, Constants.KEY_UUID, Constants.KEY_TOKEN);
+                FacadeConnection.getInstance().setupHttp(Constants.KNOT_URL, Constants.DEFAULT_UUID,
+                        Constants.DEFAULT_TOKEN);
                 mDevicesList = FacadeConnection.getInstance().httpGetDeviceList(list);
 
                 deviceUUID = mDevicesList.get(0).getUuid();
