@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //APENAS PARA CHAMAR O ONCLICK DO BOTÃO
-        mSignInBtn = findViewById(R.id.sign_in_button);
+      //  mSignInBtn = findViewById(R.id.sign_in_button);
         String verifyEmail, verifyPassword;
 
         //Verificar se o usuário já existe
@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         //SE JÁ EXISTE LOGIN E SENHA CADASTRADO, ENTÃO EXISTE USUÁRIO E VAI DIRETO PARA O PERFIL.
         if(!verifyEmail.isEmpty() && !verifyPassword.isEmpty())
         {
-            abrirPerfil(mSignInBtn);
+            abrirPerfil(new Button(this));
         }
         else
         {

@@ -19,7 +19,8 @@ public class Constants {
 
     public static final String APP_NAME = "Sensor de Perigo";
 
-    public static final String KNOT_URL = "http://knot-test.cesar.org.br:3000";
+   // public static final String KNOT_URL = "http://knot-test.cesar.org.br:3000";
+   public static final String KNOT_URL = "192.168.0.102:3000";
     public static final String DEFAULT_UUID = "14966c4d-c321-4886-bfbd-780424660000";
     public static final String DEFAULT_TOKEN = "c7ef482fdbce034f5c44c7df3c7624c59e5ab9c5";
 
